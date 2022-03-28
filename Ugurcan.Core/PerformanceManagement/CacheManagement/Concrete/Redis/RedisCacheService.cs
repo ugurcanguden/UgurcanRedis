@@ -13,32 +13,16 @@ namespace Ugurcan.Core
     {
         private IDatabase _redisDatebase;
         private IUtilitiesManagement _utilitiesManagement;
-        /// <summary>
-        /// Redis host
-        /// </summary>
-        private readonly string _redisHost;
-        /// <summary>
-        /// Redis port 
-        /// </summary>
-        private readonly string _redisPort;
-        /// <summary>
-        /// 
-        /// </summary>
-        ConnectionMultiplexer _redis;
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="utilitiesManagement"></param>
         public RedisCacheService(
-            IUtilitiesManagement utilitiesManagement,
-            IConfiguration configuration
+            IUtilitiesManagement utilitiesManagement 
             )
         {
-            _redisHost = configuration["Redis:Host"];
-            _redisPort = configuration["Redis:Port"];
-            var configString = $"{_redisHost}:{_redisPort}";
-            _redis = ConnectionMultiplexer.Connect(configString);
-            _redisDatebase = _redis.GetDatabase();
+            _redisDatebase = RedisConnectionFactory.Connection.GetDatabase(); 
             _utilitiesManagement = utilitiesManagement;
         }
         /// <summary>
