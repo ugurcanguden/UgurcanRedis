@@ -10,7 +10,7 @@ namespace Ugurcan.Core
         {
             LazyConnection = new Lazy<ConnectionMultiplexer>(() =>
             {
-                return ConnectionMultiplexer.Connect("localhost : 6379");//redis server conn string bilgisi, web config'den almak daha doğru ancak şimdilik buraya yazdık
+                return ConnectionMultiplexer.Connect(RedisConfig.RedisConnectionString); 
             });
         }
         public static ConnectionMultiplexer Connection => LazyConnection.Value;
