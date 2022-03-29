@@ -1,3 +1,4 @@
+using Ugurcan.Api;
 using Ugurcan.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 #region Singleton
-builder.Services.AddSingleton<IUtilitiesManagement, UtilitiesManagement>();
-builder.Services.AddSingleton<ICacheService, RedisCacheService>();
+builder.Services.DependencyInjectionSettings();
 #endregion
 var app = builder.Build();
 
